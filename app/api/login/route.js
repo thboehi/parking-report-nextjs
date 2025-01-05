@@ -1,5 +1,6 @@
 import jwt from 'jsonwebtoken';
 import { NextResponse } from 'next/server';
+import { logAction } from '../../../lib/log';
 
 export async function POST(request) {
   const { password } = await request.json();
