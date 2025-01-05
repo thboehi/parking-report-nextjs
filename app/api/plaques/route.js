@@ -1,5 +1,6 @@
 import dbConnect from '../../../lib/mongodb';
 import Plaque from '../../../models/Plaque';
+import { logAction } from '../../../lib/log';
 
 export async function GET(request) {
   await dbConnect();
@@ -24,12 +25,22 @@ export async function POST(request) {
     existingPlaque.reports += 1;
     existingPlaque.editedAt = new Date(); // Mise à jour du timestamp de modification
     await existingPlaque.save();
-    return new Response(JSON.stringify({ success: true }), { status: 201 });
   } else {
     const newPlaque = new Plaque({ numero, country, canton });
     await newPlaque.save();
-    return new Response(JSON.stringify({ success: true }), { status: 201 });
   }
+
+  // Ajouter un log
+  const ip = request.headers.get('x-forwarded-for') || request.socket.remoteAddress;
+  await logAction({
+    action: 'POST',
+    endpoint: '/api/plaques',
+    method: 'POST',
+    ip,
+    payload: { numero, country, canton },
+  });
+
+  return new Response(JSON.stringify({ success: true }), { status: 201 });
 }
 
 export async function PATCH(request) {
@@ -41,8 +52,19 @@ export async function PATCH(request) {
     plaque.denounced = !plaque.denounced;
     plaque.editedAt = new Date(); // Mise à jour du timestamp de modification
     await plaque.save();
+    // Ajouter un log
+    const ip = request.headers.get('x-forwarded-for') || request.socket.remoteAddress;
+    await logAction({
+      action: 'PATCH',
+      endpoint: '/api/plaques',
+      method: 'PATCH',
+      ip,
+      payload: { id, plaque },
+    });
     return new Response(JSON.stringify({ success: true }), { status: 200 });
   }
+
+  
 
   return new Response(JSON.stringify({ error: 'Plaque introuvable' }), { status: 404 });
 }
@@ -50,6 +72,19 @@ export async function PATCH(request) {
 export async function DELETE(request) {
   await dbConnect();
   const { id } = await request.json();
+  const plaque = await Plaque.findById(id);
   await Plaque.findByIdAndDelete(id);
+
+  // Ajouter un log
+  const ip = request.headers.get('x-forwarded-for') || request.socket.remoteAddress;
+  await logAction({
+    action: 'DELETE',
+    endpoint: '/api/plaques',
+    method: 'DELETE',
+    ip,
+    payload: { id, plaque },
+  });
+
+
   return new Response(JSON.stringify({ success: true }), { status: 200 });
 }
