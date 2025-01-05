@@ -1,36 +1,53 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Gestion des avertissements de parking - Agrola TopShop Châtel-St-Denis 🚗
 
-## Getting Started
+Ce projet est une application web développée avec **Next.js** permettant de gérer les avertissements posés sur les véhicules stationnés indûment dans le parking de la station **Agrola TopShop** à Châtel-St-Denis.
 
-First, run the development server:
+## 🚀 Fonctionnalités principales
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Ajout de plaques d'immatriculation** :
+  - Sélection du pays (par défaut : *Suisse*).
+  - Si *Suisse* est sélectionné, choix du canton (par défaut : *Fribourg*).
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Gestion des avertissements** :
+  - Augmente automatiquement le nombre d'avertissements si la plaque est déjà signalée.
+  - Suivi des avertissements avec indication des **dénonciations** (Oui/Non).
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+- **Recherche en temps réel** :
+  - Recherche partielle des numéros de plaques.
+  - Résultats affichés dynamiquement dans la liste des plaques.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Tri avancé** :
+  - Tri par date de création ou de modification.
+  - Ordre de tri ascendant ou descendant.
 
-## Learn More
+- **Suppression des plaques** :
+  - Suppression sécurisée avec confirmation via une alerte personnalisée (SweetAlert2).
 
-To learn more about Next.js, take a look at the following resources:
+## 🛠️ Technologies utilisées
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Frontend** :
+  - Framework : [Next.js](https://nextjs.org/)
+  - Style : [Tailwind CSS](https://tailwindcss.com/)
+  - Composants interactifs : [SweetAlert2](https://sweetalert2.github.io/)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Backend** :
+  - Base de données : [MongoDB Atlas](https://www.mongodb.com/atlas/database)
+  - ORM : Mongoose
 
-## Deploy on Vercel
+- **Autres outils** :
+  - Développement local : Node.js
+  - Gestion des dépendances : npm
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 📂 Structure du projet
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```plaintext
+parking-report-nextjs/
+├── app/                 # Dossier des pages et composants Next.js
+│   ├── api/             # API interne pour la gestion des données
+│   ├── page.js          # Page principale du projet
+├── lib/                 # Fichier de connexion à la base de données
+├── models/              # Modèles Mongoose
+├── public/              # Ressources statiques (ex. : logo)
+├── styles/              # Fichiers de style globaux
+├── .env.local           # Variables d'environnement (non versionnées)
+└── README.md            # Documentation du projet
