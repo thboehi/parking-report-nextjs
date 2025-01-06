@@ -51,6 +51,4 @@ parking-report-nextjs/
 ├── styles/              # Fichiers de style globaux
 ├── .env.local           # Variables d'environnement (non versionnées)
 └── README.md            # Documentation du projet
-
-
-I really don't know how to restart on Vercel so I push... To rebuild...
+```
