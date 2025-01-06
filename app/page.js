@@ -165,7 +165,7 @@ export default function Home() {
       </form>
 
       {/* Barre de tri */}
-      <div className="mb-6 flex gap-2 items-center justify-items-center">
+      <div className="mb-6 flex gap-2 items-center justify-items-center flex-col">
         <input
           type="text"
           placeholder="Rechercher une plaque"
