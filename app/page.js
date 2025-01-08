@@ -78,6 +78,9 @@ export default function Home() {
       DarkSwal.fire('Supprimé !', 'La plaque a été supprimée.', 'success');
     }
   };
+  function formatPlateNumber(number) {
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+  }
 
   const cantons = [
     { code: 'AG', name: 'Argovie' },
@@ -207,9 +210,14 @@ export default function Home() {
             </button>
 
             <div>
-              <span className='text-xl font-bold text-blue-600'>{plaque.canton ? `${plaque.canton}` : ''}</span>
-              <span className='text-xl font-bold text-blue-600'>{plaque.numero} </span>
-              <span className='text-xl font-bold text-blue-600 opacity-50'>({plaque.country})</span>
+              
+              <span className='text-xl font-bold text-blue-600'>{plaque.canton ? `${plaque.canton} ` : ''}</span>
+              <span className='text-xl font-bold text-blue-600'>{formatPlateNumber(plaque.numero)} </span>
+              {/* <span className='text-xl font-bold text-blue-600 opacity-50'>({plaque.country})</span> */}
+              {plaque.country === 'Suisse' && <span className="text-xl font-bold text-blue-600">🇨🇭</span>}
+              {plaque.country === 'France' && <span className="text-xl font-bold text-blue-600">🇫🇷</span>}
+              {plaque.country === 'Allemagne' && <span className="text-xl font-bold text-blue-600">🇩🇪</span>}
+              {plaque.country === 'Italie' && <span className="text-xl font-bold text-blue-600">🇮🇹</span>}
               <p className="text-sm text-gray-500">
                 Ajouté le {new Date(plaque.createdAt).toLocaleString()}
               </p>
