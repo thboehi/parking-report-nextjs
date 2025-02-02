@@ -214,10 +214,42 @@ export default function Home() {
               <span className='text-xl font-bold text-blue-600'>{plaque.canton ? `${plaque.canton} ` : ''}</span>
               <span className='text-xl font-bold text-blue-600'>{formatPlateNumber(plaque.numero)} </span>
               {/* <span className='text-xl font-bold text-blue-600 opacity-50'>({plaque.country})</span> */}
-              {plaque.country === 'Suisse' && <span className="text-xl font-bold text-blue-600">🇨🇭</span>}
-              {plaque.country === 'France' && <span className="text-xl font-bold text-blue-600">🇫🇷</span>}
-              {plaque.country === 'Allemagne' && <span className="text-xl font-bold text-blue-600">🇩🇪</span>}
-              {plaque.country === 'Italie' && <span className="text-xl font-bold text-blue-600">🇮🇹</span>}
+              {plaque.country === 'Suisse' && (
+                <Image
+                  src="/ch.svg"
+                  alt="Suisse"
+                  width={24}
+                  height={24}
+                  className="inline-block"
+                />
+              )}
+              {plaque.country === 'France' && (
+                <Image
+                  src="/fr.svg"
+                  alt="France"
+                  width={24}
+                  height={24}
+                  className="inline-block"
+                />
+              )}
+              {plaque.country === 'Allemagne' && (
+                <Image
+                  src="/de.svg"
+                  alt="Allemagne"
+                  width={24}
+                  height={24}
+                  className="inline-block"
+                />
+              )}
+              {plaque.country === 'Italie' && (
+                <Image
+                  src="/it.svg"
+                  alt="Italie"
+                  width={24}
+                  height={24}
+                  className="inline-block"
+                />
+              )}
               <p className="text-sm text-gray-500">
                 Ajouté le {new Date(plaque.createdAt).toLocaleString()}
               </p>
